@@ -1,3 +1,50 @@
+// Fonction pour vérifier si l'utilisateur est connecté
+function checkLoginStatus() {
+    const token = localStorage.getItem("authToken");
+    
+    if (token) {
+        // L'utilisateur est connecté
+        enableEditMode();
+    }
+}
+
+// Fonction pour activer le mode édition
+function enableEditMode() {
+    // Ajouter la classe edit-mode au body
+    document.body.classList.add("edit-mode");
+    
+    // Créer et ajouter le bandeau noir "Mode édition"
+    const banner = document.createElement("div");
+    banner.className = "edit-mode-banner";
+    banner.innerHTML = '<i class="fa-regular fa-pen-to-square"></i> Mode édition';
+    document.body.insertBefore(banner, document.body.firstChild);
+    
+    // Changer "login" en "logout" dans la navigation
+    const loginLink = document.querySelector('nav a[href="login.html"]');
+    if (loginLink) {
+        loginLink.textContent = "logout";
+        loginLink.href = "#";
+        loginLink.addEventListener("click", logout);
+    }
+    
+    // Ajouter le bouton "modifier" à côté de "Mes Projets"
+    const portfolioTitle = document.querySelector("#portfolio h2");
+    if (portfolioTitle) {
+        const modifyBtn = document.createElement("a");
+        modifyBtn.href = "#";
+        modifyBtn.className = "modify-btn";
+        modifyBtn.innerHTML = '<i class="fa-regular fa-pen-to-square"></i> modifier';
+        portfolioTitle.appendChild(modifyBtn);
+    }
+}
+
+// Fonction pour se déconnecter
+function logout(event) {
+    event.preventDefault();
+    localStorage.removeItem("authToken");
+    window.location.reload();
+}
+
 // URL de l'API
 const apiUrl = "http://localhost:5678/api/works";
 
@@ -73,6 +120,7 @@ function filterWorks(categoryId) {
 }
 
 // Lancer la récupération au chargement de la page
+checkLoginStatus();
 getWorks();
 getCategories();
 

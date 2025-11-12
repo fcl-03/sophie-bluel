@@ -296,3 +296,50 @@ footer nav ul {
 	font-family: 'Work Sans';
 	font-size: 14px;
 }
+
+/* Mode édition */
+.edit-mode-banner {
+    background-color: #000;
+    color: white;
+    text-align: center;
+    padding: 15px 0;
+    font-family: 'Work Sans';
+    font-size: 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.edit-mode-banner i {
+    font-size: 18px;
+}
+
+body.edit-mode {
+    margin-top: 50px; /* Pour compenser le bandeau fixe */
+}
+
+.modify-btn {
+    margin-left: 20px;
+    background: none;
+    border: none;
+    font-family: 'Work Sans';
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+}
+
+.modify-btn i {
+    margin-right: 5px;
+}
+
+/* Masquer les filtres en mode édition */
+body.edit-mode .filters {
+    display: none;
+}
